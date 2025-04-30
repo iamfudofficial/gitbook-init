@@ -9,11 +9,12 @@ export default function Home() {
 
       {/* HERO SECTION */}
       {/* HEADER */}
-      <header className="w-full bg-white flex justify-between items-center py-4 px-4 shadow-sm sticky top-0 z-20">
-        <div className="flex items-center gap-3">
+      <header className="w-full bg-white flex justify-between items-center py-3 px-2 sm:py-4 sm:px-4 shadow-sm sticky top-0 z-20">
+        <div className="flex items-center gap-2 sm:gap-3">
+  <Image src="/logo3.png" alt="Fibertexx Logo" width={80} height={80} className="h-14 w-auto sm:h-20" />
           <Image src="/logo3.png" alt="Fibertexx Logo" width={110} height={110} className="h-20 w-auto" />
         </div>
-        <nav className="hidden md:flex gap-8 text-[#223a5e] font-medium text-base">
+        <nav className="hidden md:flex gap-6 sm:gap-8 text-[#223a5e] font-medium text-sm sm:text-base">
           <a href="/jobs" className="hover:text-[#e1006e] transition">Unsere Jobangebote</a>
           <a href="#about" className="hover:text-[#e1006e] transition">Über uns</a>
           <a href="#kontakt" className="hover:text-[#e1006e] transition">Kontakt</a>
@@ -23,7 +24,7 @@ export default function Home() {
           {/* Simple mobile menu: show/hide on click (expandable for real menu if gewünscht) */}
           <details>
             <summary className="cursor-pointer text-[#223a5e] font-bold">Menü</summary>
-            <div className="flex flex-col bg-white rounded shadow mt-2 p-2 absolute right-4 top-16 min-w-[160px] border border-gray-200 z-30">
+            <div className="flex flex-col bg-white rounded shadow mt-2 p-4 absolute left-0 right-0 mx-2 min-w-[90vw] border border-gray-200 z-30">
               <a href="#jobs" className="py-2 px-3 hover:text-[#e1006e]">Unsere Jobangebote</a>
               <a href="#about" className="py-2 px-3 hover:text-[#e1006e]">Über uns</a>
               <a href="#kontakt" className="py-2 px-3 hover:text-[#e1006e]">Kontakt</a>
@@ -36,7 +37,7 @@ export default function Home() {
       <AnimatedHero />
 
       {/* FEATURES SECTION */}
-      <motion.section id="jobs" className="py-12 bg-gray-50 text-center"
+      <motion.section id="jobs" className="py-8 sm:py-12 bg-gray-50 text-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -48,7 +49,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >Was uns besonders macht</motion.h2>
-        <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 max-w-4xl mx-auto">
           {[{
             icon: "€", text: "Faire Bezahlung"
           }, {
@@ -60,12 +61,13 @@ export default function Home() {
           }].map((item, i) => (
             <motion.div
               key={item.text}
-              className="flex flex-col items-center w-40 text-[#223a5e]"
+              className="flex flex-col items-center w-full sm:w-40 text-[#223a5e]"
               initial={{ opacity: 0, scale: 0.8, y: 40 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
             >
               <span className="text-[#e1006e] text-4xl mb-2">{item.icon}</span>
+              <span className="font-semibold whitespace-pre-line text-base sm:text-lg">{item.text}</span>
               <span className="font-semibold whitespace-pre-line">{item.text}</span>
             </motion.div>
           ))}
@@ -73,9 +75,9 @@ export default function Home() {
       </motion.section>
 
       {/* HOW IT WORKS SECTION */}
-      <section className="py-12 bg-white text-center">
+      <section className="py-8 sm:py-12 bg-white text-center">
         <h2 className="text-2xl font-bold mb-8 text-[#e1006e]">So einfach geht’s</h2>
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8 text-[#223a5e]">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-4 sm:gap-8 mb-8 text-[#223a5e]">
           <div className="flex flex-col items-center">
             <span className="text-[#e1006e] text-3xl mb-2">1</span>
             <span>Bewerben</span>
@@ -91,7 +93,7 @@ export default function Home() {
             <span>Job starten</span>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto mb-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-4">
           <div className="bg-gray-100 rounded-lg p-4 text-left text-[#223a5e]">
             <span className="font-bold">Staplerfahrer (m/w/d)</span><br />Musterstadt
           </div>
@@ -109,7 +111,7 @@ export default function Home() {
       </section>
 
       {/* TESTIMONIAL SECTION */}
-      <motion.section className="py-12 bg-[#e1006e] text-white text-center"
+      <motion.section className="py-8 sm:py-12 bg-[#e1006e] text-white text-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
@@ -156,12 +158,12 @@ export default function Home() {
       </motion.section>
 
       {/* ABOUT SECTION */}
-      <motion.section id="about" className="py-16 bg-white"
+      <motion.section id="about" className="py-10 sm:py-16 bg-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <div className="max-w-5xl mx-auto px-4 flex flex-col md:flex-row gap-10 items-center">
+        <div className="max-w-5xl mx-auto px-2 sm:px-4 flex flex-col md:flex-row gap-8 sm:gap-10 items-center">
           {/* Bild links */}
           <motion.div
             className="flex-1 flex justify-center mb-8 md:mb-0"
@@ -179,21 +181,21 @@ export default function Home() {
             transition={{ duration: 0.8, type: "spring", stiffness: 80, delay: 0.2 }}
           >
             <motion.div
-              className="bg-gray-50 rounded-xl shadow-md p-6 mb-8"
+              className="bg-gray-50 rounded-xl shadow-md p-4 sm:p-6 mb-6 sm:mb-8"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.3 }}
             >
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#e1006e] mb-4">Wir stellen uns kurz vor</h2>
-              <p className="text-lg text-[#223a5e] mb-3">Die Fibertexx Personalmanagement GmbH wurde im Jahr 2008 gegründet und ist nicht nur im Besitz der von der Regionaldirektion Nürnberg erteilten unbefristeten Arbeitnehmerüberlassung, sondern verfügt auch über ein Team, welches mehr als 15 Jahre Erfahrung vorzuweisen hat.</p>
-              <p className="text-lg text-[#223a5e]">Nachdem im Jahr 2013 die Niederlassung in Augsburg eröffnet wurde, folgte im Jahr 2015 eine weitere Niederlassung in Dillingen an der Donau.</p>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#e1006e] mb-3 sm:mb-4">Wir stellen uns kurz vor</h2>
+              <p className="text-base sm:text-lg text-[#223a5e] mb-2 sm:mb-3">Die Fibertexx Personalmanagement GmbH wurde im Jahr 2008 gegründet und ist nicht nur im Besitz der von der Regionaldirektion Nürnberg erteilten unbefristeten Arbeitnehmerüberlassung, sondern verfügt auch über ein Team, welches mehr als 15 Jahre Erfahrung vorzuweisen hat.</p>
+              <p className="text-base sm:text-lg text-[#223a5e]">Nachdem im Jahr 2013 die Niederlassung in Augsburg eröffnet wurde, folgte im Jahr 2015 eine weitere Niederlassung in Dillingen an der Donau.</p>
             </motion.div>
-            <motion.div className="mb-2"
+            <motion.div className="mb-4 sm:mb-2"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.5 }}
             >
-              <h3 className="text-2xl font-bold text-[#223a5e] mb-4">Fibertexx – unsere Ansprüche</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-[#223a5e] mb-3 sm:mb-4">Fibertexx – unsere Ansprüche</h3>
               <ol className="space-y-6">
                 {[1,2,3,4,5,6].map((num, idx) => (
                   <motion.li
@@ -223,19 +225,19 @@ export default function Home() {
       </motion.section>
 
       {/* BENEFITS SECTION */}
-      <motion.section className="py-12 bg-gray-50 max-w-5xl mx-auto px-4"
+      <motion.section className="py-8 sm:py-12 bg-gray-50 max-w-5xl mx-auto px-2 sm:px-4"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.3 }}
       >
-        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
           {/* Vorteile für Kunden */}
           <motion.div
-            className="bg-white rounded-xl shadow p-8 flex flex-col items-start border-t-4 border-[#e1006e]"
+            className="bg-white rounded-xl shadow p-4 sm:p-8 flex flex-col items-start border-t-4 border-[#e1006e]"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -271,7 +273,7 @@ export default function Home() {
 
           {/* Vorteile für Mitarbeiter */}
           <motion.div
-            className="bg-white rounded-xl shadow p-8 flex flex-col items-start border-t-4 border-[#223a5e]"
+            className="bg-white rounded-xl shadow p-4 sm:p-8 flex flex-col items-start border-t-4 border-[#223a5e]"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
@@ -302,9 +304,9 @@ export default function Home() {
       </motion.section>
 
       {/* INDUSTRIES SECTION */}
-      <section className="py-12 bg-gray-50 max-w-4xl mx-auto px-4">
+      <section className="py-8 sm:py-12 bg-gray-50 max-w-4xl mx-auto px-2 sm:px-4">
         <h2 className="text-2xl font-bold text-[#e1006e] mb-8 text-center">Fibertexx vermittelt hauptsächlich in folgenden Branchen</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 sm:gap-8">
           <div className="bg-white rounded-2xl p-6 shadow-lg flex flex-col items-center hover:shadow-2xl transition group">
             <span className="mb-3">
               {/* Flugzeug Icon */}
@@ -357,10 +359,10 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer id="kontakt" className="bg-[#e1006e] text-white pt-12 pb-6 mt-8">
-        <div className="max-w-5xl mx-auto px-4">
+      <footer id="kontakt" className="bg-[#e1006e] text-white pt-8 sm:pt-12 pb-6 mt-8">
+        <div className="max-w-5xl mx-auto px-2 sm:px-4">
           <h2 className="text-2xl font-bold text-center mb-8 tracking-wide">Unsere Standorte & Kontakt</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 border-b border-[#ff5bb0] pb-8">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 border-b border-[#ff5bb0] pb-8">
             {/* Dillingen */}
             <div className="bg-[#e1006e]/80 rounded-lg p-6 shadow-md flex flex-col gap-2 border border-[#ff5bb0]">
               <h3 className="font-semibold text-lg mb-1">Dillingen a. d. Donau <span className='text-xs'>(Zentrale)</span></h3>
@@ -393,7 +395,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex flex-col md:flex-row md:justify-between items-center gap-6 pt-8 pb-4 border-b border-[#ff5bb0] mt-2">
+          <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-4 sm:gap-6 pt-6 sm:pt-8 pb-4 border-b border-[#ff5bb0] mt-2">
             <div className="text-center md:text-left">
               <h3 className="font-semibold mb-1 text-base">Öffnungszeiten</h3>
               <p className="text-sm">Montag-Donnerstag: 8-17 Uhr<br />Freitag: 8-14 Uhr</p>
