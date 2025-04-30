@@ -1,14 +1,17 @@
+"use client";
 import Image from "next/image";
+import AnimatedHero from "./components/AnimatedHero";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-white font-sans">
+    <main className="min-h-screen flex flex-col bg-white font-sans">
+
       {/* HERO SECTION */}
       {/* HEADER */}
       <header className="w-full bg-white flex justify-between items-center py-4 px-4 shadow-sm sticky top-0 z-20">
         <div className="flex items-center gap-3">
-          <Image src="/logo3.png" alt="Fibertexx Logo" width={70} height={70} className="h-12 w-auto" />
-          <span className="font-bold text-[#223a5e] text-lg tracking-wide">Fibertexx</span>
+          <Image src="/logo3.png" alt="Fibertexx Logo" width={110} height={110} className="h-20 w-auto" />
         </div>
         <nav className="hidden md:flex gap-8 text-[#223a5e] font-medium text-base">
           <a href="/jobs" className="hover:text-[#e1006e] transition">Unsere Jobangebote</a>
@@ -30,48 +33,44 @@ export default function Home() {
       </header>
 
       {/* HERO SECTION */}
-      <section
-        className="relative text-white px-4 py-16 flex items-center justify-center min-h-[380px] md:min-h-[520px]"
-        style={{
-          backgroundImage: "url('/ChatGPT Image 29. Apr. 2025, 12_15_31.png')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
-        {/* Overlay für bessere Lesbarkeit */}
-        <div className="absolute inset-0 bg-[#223a5e]/70" aria-hidden="true"></div>
-        <div className="relative z-10 w-full max-w-xl text-center mx-auto">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight drop-shadow-xl">
-            Arbeiten, wo du gebraucht wirst.<br />
-            Starte jetzt mit <span className="text-white">Fibertexx!</span>
-          </h1>
-          <p className="mb-6 text-lg drop-shadow-xl">Finde schnell deinen neuen Job – einfach bewerben, schnell starten.</p>
-          <a href="#bewerben" className="inline-block bg-[#e1006e] text-white font-bold px-8 py-3 rounded-full shadow hover:bg-pink-700 border-2 border-[#e1006e] transition">Jetzt bewerben</a>
-        </div>
-      </section>
+      <AnimatedHero />
 
       {/* FEATURES SECTION */}
-      <section id="jobs" className="py-12 bg-gray-50 text-center">
-        <h2 className="text-2xl font-bold mb-8 text-[#e1006e]">Was uns besonders macht</h2>
+      <motion.section id="jobs" className="py-12 bg-gray-50 text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ staggerChildren: 0.15 }}
+        >
+        <motion.h2
+          className="text-2xl font-bold mb-8 text-[#e1006e]"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7 }}
+        >Was uns besonders macht</motion.h2>
         <div className="flex flex-wrap justify-center gap-8 max-w-4xl mx-auto">
-          <div className="flex flex-col items-center w-40 text-[#223a5e]">
-            <span className="text-[#e1006e] text-4xl mb-2">€</span>
-            <span className="font-semibold">Faire Bezahlung</span>
-          </div>
-          <div className="flex flex-col items-center w-40 text-[#223a5e]">
-            <span className="text-[#e1006e] text-4xl mb-2">⏱️</span>
-            <span className="font-semibold">Schneller Start<br />in 7 Tagen</span>
-          </div>
-          <div className="flex flex-col items-center w-40 text-[#223a5e]">
-            <span className="text-[#e1006e] text-4xl mb-2">🔄</span>
-            <span className="font-semibold">Flexible Einsätze</span>
-          </div>
-          <div className="flex flex-col items-center w-40 text-[#223a5e]">
-            <span className="text-[#e1006e] text-4xl mb-2">👤</span>
-            <span className="font-semibold">Persönliche Betreuung</span>
-          </div>
+          {[{
+            icon: "€", text: "Faire Bezahlung"
+          }, {
+            icon: "⏱️", text: "Schneller Start\nin 7 Tagen"
+          }, {
+            icon: "🔄", text: "Flexible Einsätze"
+          }, {
+            icon: "👤", text: "Persönliche Betreuung"
+          }].map((item, i) => (
+            <motion.div
+              key={item.text}
+              className="flex flex-col items-center w-40 text-[#223a5e]"
+              initial={{ opacity: 0, scale: 0.8, y: 40 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
+            >
+              <span className="text-[#e1006e] text-4xl mb-2">{item.icon}</span>
+              <span className="font-semibold whitespace-pre-line">{item.text}</span>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* HOW IT WORKS SECTION */}
       <section className="py-12 bg-white text-center">
@@ -106,108 +105,201 @@ export default function Home() {
             <span className="font-bold">Maschinenbediener</span><br />Musterstadt
           </div>
         </div>
-        <a href="#jobs" className="inline-block mt-4 bg-[#e1006e] text-white font-bold px-8 py-3 rounded-full shadow hover:bg-pink-700 border-2 border-[#e1006e] transition">Mehr Jobs</a>
+        <a href="/jobs" className="inline-block mt-4 bg-[#e1006e] text-white font-bold px-8 py-3 rounded-full shadow hover:bg-pink-700 border-2 border-[#e1006e] transition">Mehr Jobs</a>
       </section>
 
       {/* TESTIMONIAL SECTION */}
-      <section className="py-12 bg-[#e1006e] text-white text-center">
-        <div className="flex flex-col items-center gap-4 max-w-xl mx-auto">
-          <Image src="/istockphoto-1045886560-612x612.jpg" alt="Mitarbeiter Testimonial" width={96} height={96} className="rounded-full border-4 border-white mx-auto" />
-          <h3 className="text-xl font-bold mb-2">Unsere Mitarbeiter sagen</h3>
-          <blockquote className="italic">Dank Fibertexx habe ich endlich einen Job gefunden, der zu mir passt.&quot;<br /><span className="not-italic font-semibold block mt-2">Maria, 24</span></blockquote>
-        </div>
-      </section>
+      <motion.section className="py-12 bg-[#e1006e] text-white text-center"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <motion.div
+          className="flex flex-col items-center gap-4 max-w-xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.6 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.7 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 80 }}
+          >
+            <Image src="/istockphoto-1045886560-612x612.jpg" alt="Mitarbeiter Testimonial" width={96} height={96} className="rounded-full border-4 border-white mx-auto hover:scale-105 transition-transform duration-300" />
+          </motion.div>
+          <motion.h3
+            className="text-xl font-bold mb-2"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >Unsere Mitarbeiter sagen</motion.h3>
+          <motion.blockquote
+            className="italic"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Dank Fibertexx habe ich endlich einen Job gefunden, der zu mir passt."<br />
+            <motion.span
+              className="not-italic font-semibold block mt-2"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.7 }}
+              style={{
+                background: "linear-gradient(90deg,#fff 60%,#f7d8e6 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+              }}
+            >Maximilian, 24</motion.span>
+          </motion.blockquote>
+        </motion.div>
+      </motion.section>
 
       {/* ABOUT SECTION */}
-      <section id="about" className="py-16 bg-white">
+      <motion.section id="about" className="py-16 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
         <div className="max-w-5xl mx-auto px-4 flex flex-col md:flex-row gap-10 items-center">
           {/* Bild links */}
-          <div className="flex-1 flex justify-center mb-8 md:mb-0">
+          <motion.div
+            className="flex-1 flex justify-center mb-8 md:mb-0"
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 80 }}
+          >
             <img src="/ChatGPT Image 29. Apr. 2025, 12_42_55.png" alt="Fibertexx Teamfoto" className="w-72 h-96 object-cover rounded-2xl shadow-lg bg-gray-50" />
-          </div>
+          </motion.div>
           {/* Text rechts */}
-          <div className="flex-1">
-            <div className="bg-gray-50 rounded-xl shadow-md p-6 mb-8">
+          <motion.div
+            className="flex-1"
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, type: "spring", stiffness: 80, delay: 0.2 }}
+          >
+            <motion.div
+              className="bg-gray-50 rounded-xl shadow-md p-6 mb-8"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+            >
               <h2 className="text-3xl md:text-4xl font-extrabold text-[#e1006e] mb-4">Wir stellen uns kurz vor</h2>
               <p className="text-lg text-[#223a5e] mb-3">Die Fibertexx Personalmanagement GmbH wurde im Jahr 2008 gegründet und ist nicht nur im Besitz der von der Regionaldirektion Nürnberg erteilten unbefristeten Arbeitnehmerüberlassung, sondern verfügt auch über ein Team, welches mehr als 15 Jahre Erfahrung vorzuweisen hat.</p>
               <p className="text-lg text-[#223a5e]">Nachdem im Jahr 2013 die Niederlassung in Augsburg eröffnet wurde, folgte im Jahr 2015 eine weitere Niederlassung in Dillingen an der Donau.</p>
-            </div>
-            <div className="mb-2">
+            </motion.div>
+            <motion.div className="mb-2"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+            >
               <h3 className="text-2xl font-bold text-[#223a5e] mb-4">Fibertexx – unsere Ansprüche</h3>
               <ol className="space-y-6">
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#e1006e] text-white flex items-center justify-center text-xl font-bold shadow">1</span>
-                  <span className="text-[#223a5e] text-base">Ihre Geschäftsbedürfnisse analysieren, verstehen und motivierte Mitarbeiter/-innen mit dem richtigen Know-how zusammenbringen</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#e1006e] text-white flex items-center justify-center text-xl font-bold shadow">2</span>
-                  <span className="text-[#223a5e] text-base">Ein strategischer Partner an Ihrer Seite zu sein, mit einer auf Sie abgestimmten und einzigartigen Konzeptlösung</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#e1006e] text-white flex items-center justify-center text-xl font-bold shadow">3</span>
-                  <span className="text-[#223a5e] text-base">Erhaltung und Steigerung Ihrer Wettbewerbsfähigkeit durch Organisation und Koordination Ihrer Mitarbeiter</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#e1006e] text-white flex items-center justify-center text-xl font-bold shadow">4</span>
-                  <span className="text-[#223a5e] text-base">Vermittlung motivierter Mitarbeiter, die vollen Einsatz und Leistung für Ihr Unternehmen bringen</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#e1006e] text-white flex items-center justify-center text-xl font-bold shadow">5</span>
-                  <span className="text-[#223a5e] text-base">Hohe Übereinstimmung zwischen Ihrer Stellenanforderung und dem Qualifikationsprofil</span>
-                </li>
-                <li className="flex items-start gap-4">
-                  <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#e1006e] text-white flex items-center justify-center text-xl font-bold shadow">6</span>
-                  <span className="text-[#223a5e] text-base">Ein fairer und ehrlicher Arbeitgeber für unsere Mitarbeiter und Mitarbeiterinnen sein</span>
-                </li>
+                {[1,2,3,4,5,6].map((num, idx) => (
+                  <motion.li
+                    key={num}
+                    className="flex items-start gap-4"
+                    initial={{ opacity: 0, x: 40 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.7 + idx * 0.1 }}
+                  >
+                    <span className="flex-shrink-0 w-10 h-10 rounded-full bg-[#e1006e] text-white flex items-center justify-center text-xl font-bold shadow">{num}</span>
+                    <span className="text-[#223a5e] text-base">
+                      {[
+                        "Ihre Geschäftsbedürfnisse analysieren, verstehen und motivierte Mitarbeiter/-innen mit dem richtigen Know-how zusammenbringen",
+                        "Ein strategischer Partner an Ihrer Seite zu sein, mit einer auf Sie abgestimmten und einzigartigen Konzeptlösung",
+                        "Erhaltung und Steigerung Ihrer Wettbewerbsfähigkeit durch Organisation und Koordination Ihrer Mitarbeiter",
+                        "Vermittlung motivierter Mitarbeiter, die vollen Einsatz und Leistung für Ihr Unternehmen bringen",
+                        "Hohe Übereinstimmung zwischen Ihrer Stellenanforderung und dem Qualifikationsprofil",
+                        "Ein fairer und ehrlicher Arbeitgeber für unsere Mitarbeiter und Mitarbeiterinnen sein"
+                      ][idx]}
+                    </span>
+                  </motion.li>
+                ))}
               </ol>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* BENEFITS SECTION */}
-      <section className="py-12 bg-gray-50 max-w-5xl mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <motion.section className="py-12 bg-gray-50 max-w-5xl mx-auto px-4"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <motion.div className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
           {/* Vorteile für Kunden */}
-          <div className="bg-white rounded-xl shadow p-8 flex flex-col items-start border-t-4 border-[#e1006e]">
+          <motion.div
+            className="bg-white rounded-xl shadow p-8 flex flex-col items-start border-t-4 border-[#e1006e]"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+          >
             <h2 className="text-xl font-bold text-[#e1006e] mb-4 flex items-center gap-2">
               <svg className="w-6 h-6 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
               Ihre Vorteile als unser Kunde
             </h2>
             <ul className="space-y-3 text-[#223a5e]">
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Ein Team mit mehr als 15-jähriger Erfahrung im Bereich Arbeitnehmerüberlassung</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Professionelles Arbeiten mit kompetenten Ansprechpartnern vor Ort</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>24 Stunden Rufbereitschaft ermöglichen eine optimale und qualifizierte Betreuung</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Flächendeckende und niederlassungsübergreifende Zusammenarbeit</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Unbefristete Arbeitnehmerüberlassung erteilt durch die Regionaldirektion Nürnberg</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Schnelle und qualifizierte Lösungen für die Abdeckung von Personalanforderungen</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Geringe Einarbeitungszeit durch erfahrene und hochqualifizierte Mitarbeiter</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Faire und transparente Preisgestaltung</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Spezifische Auswahl unserer Mitarbeiter/innen in Abstimmung auf Ihr Unternehmen</li>
+              {[
+                "Ein Team mit mehr als 15-jähriger Erfahrung im Bereich Arbeitnehmerüberlassung",
+                "Professionelles Arbeiten mit kompetenten Ansprechpartnern vor Ort",
+                "24 Stunden Rufbereitschaft ermöglichen eine optimale und qualifizierte Betreuung",
+                "Flächendeckende und niederlassungsübergreifende Zusammenarbeit",
+                "Unbefristete Arbeitnehmerüberlassung erteilt durch die Regionaldirektion Nürnberg",
+                "Schnelle und qualifizierte Lösungen für die Abdeckung von Personalanforderungen",
+                "Geringe Einarbeitungszeit durch erfahrene und hochqualifizierte Mitarbeiter",
+                "Faire und transparente Preisgestaltung",
+                "Spezifische Auswahl unserer Mitarbeiter/innen in Abstimmung auf Ihr Unternehmen"
+              ].map((text, idx) => (
+                <motion.li
+                  key={text}
+                  className="flex items-start gap-2"
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.3 + idx * 0.07 }}
+                >
+                  <span className="mt-1"><svg className="w-5 h-5 text-[#e1006e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>{text}
+                </motion.li>
+              ))}
             </ul>
-          </div>
+          </motion.div>
 
           {/* Vorteile für Mitarbeiter */}
-          <div className="bg-white rounded-xl shadow p-8 flex flex-col items-start border-t-4 border-[#223a5e]">
+          <motion.div
+            className="bg-white rounded-xl shadow p-8 flex flex-col items-start border-t-4 border-[#223a5e]"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          >
             <h2 className="text-xl font-bold text-[#223a5e] mb-4 flex items-center gap-2">
               <svg className="w-6 h-6 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
               Ihre Vorteile als Mitarbeiter von Fibertexx
             </h2>
             <ul className="space-y-3 text-[#223a5e]">
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Unbefristete Arbeitsverträge</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Umfassende, faire und ehrliche Betreuung</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Hohe Übernahmequoten bei unseren Kundenbetrieben</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Durchführung von qualifizierten Weiterbildungsmaßnahmen</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Kennenlernen verschiedener Unternehmen</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Erweiterung Ihrer fachlichen Kompetenzen</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Einstieg in neue Branchen für Quereinsteiger</li>
-              <li className="flex items-start gap-2"><span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>Weihnachts- und Urlaubsgeld</li>
+              {[
+                "Unbefristete Arbeitsverträge",
+                "Umfassende, faire und ehrliche Betreuung",
+                "Hohe Übernahmequoten bei unseren Kundenbetrieben"
+              ].map((text, idx) => (
+                <motion.li
+                  key={text}
+                  className="flex items-start gap-2"
+                  initial={{ opacity: 0, x: 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 + idx * 0.07 }}
+                >
+                  <span className="mt-1"><svg className="w-5 h-5 text-[#223a5e]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg></span>{text}
+                </motion.li>
+              ))}
             </ul>
-          </div>
-        </div>
-      </section>
-
-
+          </motion.div>
+        </motion.div>
+      </motion.section>
 
       {/* INDUSTRIES SECTION */}
       <section className="py-12 bg-gray-50 max-w-4xl mx-auto px-4">
@@ -321,6 +413,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
