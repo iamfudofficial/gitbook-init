@@ -139,7 +139,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Dank Fibertexx habe ich endlich einen Job gefunden, der zu mir passt."<br />
+            Dank Fibertexx habe ich endlich einen Job gefunden, der zu mir passt.&quot;<br />
             <motion.span
               className="not-italic font-semibold block mt-2"
               initial={{ opacity: 0, x: -20 }}
