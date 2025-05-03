@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function BewerbenForm() {
   const [step, setStep] = useState(1);
@@ -18,6 +18,7 @@ export default function BewerbenForm() {
   });
   const [fileName, setFileName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value, type, checked } = e.target;
@@ -42,7 +43,11 @@ export default function BewerbenForm() {
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+    if (step !== 3) {
+      e.preventDefault();
+      return;
+    }
+    // Netlify Forms benötigt kein extra JS-Handling – Browser POST reicht.
     setSubmitted(true);
   }
 
@@ -58,7 +63,17 @@ export default function BewerbenForm() {
   }
 
   return (
-    <form className="bg-white rounded-xl shadow p-8 max-w-lg mx-auto mt-8" onSubmit={handleSubmit}>
+    <form
+      className="bg-white rounded-xl shadow p-8 max-w-lg mx-auto mt-8"
+      name="bewerbung"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      encType="multipart/form-data"
+      onSubmit={handleSubmit}
+      ref={formRef}
+    >
+
       {/* Stepper */}
       <div className="flex justify-between mb-8">
         {[1,2,3].map(s => (
@@ -99,7 +114,7 @@ export default function BewerbenForm() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
-            <input type="file" accept=".pdf,.doc,.docx" className="hidden" id="cv-upload" onChange={handleFile} />
+            <input type="file" accept=".pdf,.doc,.docx" className="hidden" id="cv-upload" name="file" onChange={handleFile} required />
             <label htmlFor="cv-upload" className="cursor-pointer">
               {fileName ? (
                 <span className="text-[#223a5e]">{fileName}</span>
