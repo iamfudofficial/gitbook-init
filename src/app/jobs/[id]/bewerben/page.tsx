@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function BewerbenForm() {
   const [step, setStep] = useState(1);
@@ -18,6 +18,7 @@ export default function BewerbenForm() {
   });
   const [fileName, setFileName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
     const { name, value, type, checked } = e.target;
@@ -41,11 +42,6 @@ export default function BewerbenForm() {
     e.preventDefault();
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
-  }
-
   if (submitted) {
     return (
       <div className="min-h-screen bg-[#f7f8fa] flex items-center justify-center">
@@ -58,7 +54,21 @@ export default function BewerbenForm() {
   }
 
   return (
-    <form className="bg-white rounded-xl shadow p-8 max-w-lg mx-auto mt-8" onSubmit={handleSubmit}>
+    <form
+      className="bg-white rounded-xl shadow p-8 max-w-lg mx-auto mt-8"
+      name="bewerbung"
+      method="POST"
+      data-netlify="true"
+      data-netlify-honeypot="bot-field"
+      encType="multipart/form-data"
+      ref={formRef}
+    >
+      {/* Netlify Honeypot und Formname */}
+      <input type="hidden" name="form-name" value="bewerbung" />
+      <p className="hidden">
+        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+      </p>
+
       {/* Stepper */}
       <div className="flex justify-between mb-8">
         {[1,2,3].map(s => (
@@ -99,7 +109,7 @@ export default function BewerbenForm() {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
           >
-            <input type="file" accept=".pdf,.doc,.docx" className="hidden" id="cv-upload" onChange={handleFile} />
+            <input type="file" accept=".pdf,.doc,.docx" className="hidden" id="cv-upload" name="file" onChange={handleFile} required />
             <label htmlFor="cv-upload" className="cursor-pointer">
               {fileName ? (
                 <span className="text-[#223a5e]">{fileName}</span>
@@ -121,20 +131,24 @@ export default function BewerbenForm() {
         <div className="space-y-4">
           <div className="mb-2">
             <div className="font-medium">Name:</div>
+            <input type="hidden" name="name" value={form.name} readOnly />
             <div>{form.name}</div>
           </div>
           <div className="mb-2">
             <div className="font-medium">E-Mail:</div>
+            <input type="hidden" name="email" value={form.email} readOnly />
             <div>{form.email}</div>
           </div>
           {form.tel && (
             <div className="mb-2">
               <div className="font-medium">Telefon:</div>
+              <input type="hidden" name="tel" value={form.tel} readOnly />
               <div>{form.tel}</div>
             </div>
           )}
           <div className="mb-2">
             <div className="font-medium">Lebenslauf:</div>
+            <input type="hidden" name="fileName" value={fileName} readOnly />
             <div>{fileName}</div>
           </div>
           <div className="flex items-center gap-2">
