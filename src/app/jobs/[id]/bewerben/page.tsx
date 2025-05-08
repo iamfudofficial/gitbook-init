@@ -164,3 +164,18 @@ export default function BewerbenForm() {
     </form>
   );
 }
+
+// Hidden static Netlify form for build-time detection
+export function NetlifyDummyForm() {
+  return (
+    <form name="bewerbung" data-netlify="true" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="tel" name="tel" />
+      <input type="file" name="file" />
+      <input type="checkbox" name="datenschutz" />
+    </form>
+  );
+}
+
+// Füge in deiner Hauptseite <NetlifyDummyForm /> ein, z.B. in src/app/page.tsx

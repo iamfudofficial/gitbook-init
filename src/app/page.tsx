@@ -2,6 +2,7 @@
 import Image from "next/image";
 import AnimatedHero from "./components/AnimatedHero";
 import { motion } from "framer-motion";
+import { NetlifyDummyForm } from "./jobs/[id]/bewerben/page";
 
 export default function Home() {
   return (
@@ -415,6 +416,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <NetlifyDummyForm />
     </main>
   );
 }
