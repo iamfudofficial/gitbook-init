@@ -2,7 +2,7 @@
 import Image from "next/image";
 import AnimatedHero from "./components/AnimatedHero";
 import { motion } from "framer-motion";
-import { NetlifyDummyForm } from "./jobs/[id]/bewerben/page";
+import NetlifyDummyForm from "./NetlifyDummyForm";
 
 export default function Home() {
   return (
