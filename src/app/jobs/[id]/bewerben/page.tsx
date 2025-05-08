@@ -42,15 +42,6 @@ export default function BewerbenForm() {
     e.preventDefault();
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    if (step !== 3) {
-      e.preventDefault();
-      return;
-    }
-    // Netlify Forms benötigt kein extra JS-Handling – Browser POST reicht.
-    setSubmitted(true);
-  }
-
   if (submitted) {
     return (
       <div className="min-h-screen bg-[#f7f8fa] flex items-center justify-center">
