@@ -70,9 +70,13 @@ export default function BewerbenForm() {
       data-netlify="true"
       data-netlify-honeypot="bot-field"
       encType="multipart/form-data"
-      onSubmit={handleSubmit}
       ref={formRef}
     >
+      {/* Netlify Honeypot und Formname */}
+      <input type="hidden" name="form-name" value="bewerbung" />
+      <p className="hidden">
+        <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+      </p>
 
       {/* Stepper */}
       <div className="flex justify-between mb-8">
@@ -136,20 +140,24 @@ export default function BewerbenForm() {
         <div className="space-y-4">
           <div className="mb-2">
             <div className="font-medium">Name:</div>
+            <input type="hidden" name="name" value={form.name} readOnly />
             <div>{form.name}</div>
           </div>
           <div className="mb-2">
             <div className="font-medium">E-Mail:</div>
+            <input type="hidden" name="email" value={form.email} readOnly />
             <div>{form.email}</div>
           </div>
           {form.tel && (
             <div className="mb-2">
               <div className="font-medium">Telefon:</div>
+              <input type="hidden" name="tel" value={form.tel} readOnly />
               <div>{form.tel}</div>
             </div>
           )}
           <div className="mb-2">
             <div className="font-medium">Lebenslauf:</div>
+            <input type="hidden" name="fileName" value={fileName} readOnly />
             <div>{fileName}</div>
           </div>
           <div className="flex items-center gap-2">
