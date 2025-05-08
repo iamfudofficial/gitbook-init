@@ -17,7 +17,7 @@ export default function BewerbenForm() {
     datenschutz: false,
   });
   const [fileName, setFileName] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
