@@ -415,17 +415,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-      {/* Netlify Dummy-Formular für Build-Erkennung */}
-      <div style={{ display: "none" }}>
-        <form name="bewerbung" data-netlify="true" method="POST">
-          <input type="hidden" name="form-name" value="bewerbung" />
-          <input type="text" name="name" />
-          <input type="email" name="email" />
-          <input type="tel" name="tel" />
-          <input type="file" name="file" />
-          <input type="checkbox" name="datenschutz" />
-        </form>
-      </div>
     </main>
   );
 }

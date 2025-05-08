@@ -58,14 +58,13 @@ export default function BewerbenForm() {
       className="bg-white rounded-xl shadow p-8 max-w-lg mx-auto mt-8"
       name="bewerbung"
       method="POST"
-      data-netlify="true"
+      
       data-netlify-honeypot="bot-field"
       encType="multipart/form-data"
       ref={formRef}
     >
       {/* Netlify Honeypot und Formname */}
-      <input type="hidden" name="form-name" value="bewerbung" />
-      <p className="hidden">
+            <p className="hidden">
         <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
       </p>
 
