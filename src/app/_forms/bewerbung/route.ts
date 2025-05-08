@@ -21,7 +21,7 @@ export async function POST(request: Request) {
     const text = `Neue Bewerbung:\n\nName: ${name}\nE-Mail: ${email}\nTelefon: ${tel}\nDatenschutz akzeptiert: ${datenschutz}`;
 
     // Attachment vorbereiten (optional)
-    let attachments = [];
+    const attachments = [];
     if (file && file.size > 0) {
       const arrayBuffer = await file.arrayBuffer();
       attachments.push({
